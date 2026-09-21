@@ -40,10 +40,12 @@ public abstract class Bebida {
     }
 
     public String obtenerDetalle(){
-        return "";
+        return toString();
     }
 
     public String toString(){
-        return "";
+        String respuesta = "";
+
+        return respuesta;
     }
 }

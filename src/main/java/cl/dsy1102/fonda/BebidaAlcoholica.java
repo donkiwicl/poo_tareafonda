@@ -1,6 +1,6 @@
 package cl.dsy1102.fonda;
 
-public class BebidaAlcoholica extends Bebida {
+public class BebidaAlcoholica extends Bebida implements ConsumoResponsable {
     private int Limite;
     private double gradosAlcohol;
     private boolean certificada;
@@ -38,11 +38,23 @@ public class BebidaAlcoholica extends Bebida {
         this.certificada = certificada;
     }
 
-    public boolean isVentaRestringida() {
-        return ventaRestringida;
+    public void RestringirVenta(){
+        this.ventaRestringida = true;
     }
 
-    public void setVentaRestringida(boolean ventaRestringida) {
-        this.ventaRestringida = ventaRestringida;
+    public int superaLimite(int unidades){
+        return unidades;
+    }
+
+    @Override
+    public double calcularPrecio() {
+        return super.calcularPrecio();
+    }
+
+    @Override
+    public String toString() {
+        String respuesta = super.toString();
+        respuesta = respuesta + "\nLimite: " + Limite;
+        return  respuesta;
     }
 }
