@@ -1,12 +1,9 @@
 package cl.dsy1102.fonda;
 
 public interface ConsumoResponsable{
-    static boolean tieneVentaRest(){
-        return false;
-    }
-    static void restringirVenta(){}
+    boolean tieneVentaRest();
 
-    static boolean superaLimVent(){
-        return false;
-    }
+    void restringirVenta();
+
+    boolean superaLimVent(int unidades);
 }

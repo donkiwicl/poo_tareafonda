@@ -6,9 +6,9 @@ public abstract class Bebida {
     protected int stock;
 
     public Bebida(String nombre, int volumenML, int stock) {
-        this.nombre = nombre;
-        this.volumenML = volumenML;
-        this.stock = stock;
+        setNombre(nombre);
+        setVolumenML(volumenML);
+        setStock(stock);
     }
 
     public String getNombre() {
@@ -16,6 +16,9 @@ public abstract class Bebida {
     }
 
     public void setNombre(String nombre) {
+        if (nombre == null || nombre.trim().isEmpty()) {
+            throw new IllegalArgumentException("El nombre es obligatorio");
+        }
         this.nombre = nombre;
     }
 
@@ -24,6 +27,9 @@ public abstract class Bebida {
     }
 
     public void setVolumenML(int volumenML) {
+        if (volumenML < 100 || volumenML > 3000) {
+            throw new IllegalArgumentException("El volumen debe ser un valor entre 100 y 3000 ml");
+        }
         this.volumenML = volumenML;
     }
 
@@ -32,6 +38,9 @@ public abstract class Bebida {
     }
 
     public void setStock(int stock) {
+        if (stock <= 0) {
+            throw new IllegalArgumentException("El stock debe ser mayor que 0");
+        }
         this.stock = stock;
     }
 
@@ -44,8 +53,11 @@ public abstract class Bebida {
     }
 
     public String toString(){
-        String respuesta = "";
-
+        String respuesta = "=============================";
+        respuesta += "\nTipo: "+this.getClass().getSimpleName();
+        respuesta +=         "\nNombre: " + this.nombre;
+        respuesta +=         "\nVolumen: " + this.volumenML;
+        respuesta +=         "\nStock: " + this.stock;
         return respuesta;
     }
 }
