@@ -1,21 +1,88 @@
+//Use IA para guiarme y aprender como hacerlo asi que hay conceptos que no hemos visto en clases
+
 package cl.dsy1102.fonda;
 
-/**
- * Punto de entrada de la Tarea Fiestas Patrias - Fonda San Belarmino.
- *
- * Revisa el enunciado en README.md. Debes crear, en este mismo paquete,
- * las clases del diagrama: Bebida, BebidaAlcoholica, BebidaSinAlcohol,
- * la interfaz ConsumoResponsable y la clase GestorFonda.
- */
+import java.util.List;
+
 public class Main {
 
     public static void main(String[] args) {
-        // TODO 1: instanciar las cuatro bebidas con los datos del enunciado.
-        // TODO 2: marcar la bebida alcoholica 'Chicha' con la venta restringida.
-        // TODO 3: registrarlas todas en el gestor.
-        // TODO 4: solicitar las cuatro ventas indicadas en el enunciado.
-        // TODO 5: buscar por nombre "Chicha" y listar todas las bebidas.
 
-        System.out.println("Proyecto listo. Comienza por la clase Bebida.");
+        GestorFonda gestor = new GestorFonda();
+
+        Bebida chichaAlcoholica =
+                new BebidaAlcoholica(
+                        "Chicha",
+                        1000,
+                        40,
+                        12.0,
+                        false,
+                        true
+                );
+
+        Bebida piscoSour =
+                new BebidaAlcoholica(
+                        "Pisco Sour",
+                        500,
+                        25,
+                        18.0,
+                        true,
+                        false
+                );
+
+        Bebida chichaSinAlcohol =
+                new BebidaSinAlcohol(
+                        "Chicha",
+                        1000,
+                        60,
+                        95
+                );
+
+        Bebida moteConHuesillo =
+                new BebidaSinAlcohol(
+                        "Mote con Huesillo",
+                        400,
+                        50,
+                        70
+                );
+
+        gestor.registrar(chichaAlcoholica);
+        gestor.registrar(piscoSour);
+        gestor.registrar(chichaSinAlcohol);
+        gestor.registrar(moteConHuesillo);
+
+        System.out.println();
+
+        System.out.println(
+                "=== BUSQUEDA POR NOMBRE: \"Chicha\" ==="
+        );
+
+        List<Bebida> resultados =
+                gestor.buscarPorNombre("Chicha");
+
+        for (Bebida bebida : resultados) {
+            System.out.println(bebida.obtenerDetalle());
+            System.out.println("---");
+        }
+
+        System.out.println();
+
+        System.out.println("=== VENTAS ===");
+
+        gestor.vender("Pisco Sour", 2);
+
+        gestor.vender("Pisco Sour", 5);
+
+        gestor.vender("Chicha", 1);
+
+        gestor.vender("Mote con Huesillo", 6);
+
+        System.out.println();
+
+        System.out.println("=== LISTADO DE BEBIDAS ===");
+
+        for (Bebida bebida : gestor.obtenerTodas()) {
+            System.out.println(bebida);
+        }
     }
 }
