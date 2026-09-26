@@ -9,7 +9,14 @@ public class GestorFonda {
     public GestorFonda() {}
 
     public void registrar(Bebida bebida){
+
         this.bebidas.add(bebida);
+        if (bebida instanceof BebidaAlcoholica){
+            System.out.println(bebida.getNombre() + " (BebidaAlcoholica) registrada correctamente");
+        }
+        if (bebida instanceof BebidaSinAlcohol){
+            System.out.println(bebida.getNombre() + " (BebidaSinAlcohol) registrada correctamente");
+        }
     }
 
     public List<Bebida> buscarPorNombre(String nombre){
@@ -28,9 +35,11 @@ public class GestorFonda {
         }
 
     public void vender(String nombre, int unidades){
-        List<Bebida> auxiliarParaVenta= buscarPorNombre(nombre);
-        //VentaBasica //Corregir
-        auxiliarParaVenta.get(0).setStock(auxiliarParaVenta.get(0).getStock()-unidades);
+    for (Bebida bebida: this.bebidas) {
+        if (bebida.getNombre().equals(nombre)){
+            bebida.venderBebidaActual(unidades);
+        }
+    }
     }
 
     public List<Bebida> obtenerTodas(){

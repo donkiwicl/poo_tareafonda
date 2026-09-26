@@ -6,11 +6,11 @@ public class BebidaAlcoholica extends Bebida implements ConsumoResponsable{
     private boolean certificada;
     private boolean ventaRestringida;
 
-    public BebidaAlcoholica(String nombre, int volumenMl, int stock, double gradosAlcohol, boolean certificada, boolean ventaRestringida) {
+    public BebidaAlcoholica(String nombre, int volumenMl, int stock, double gradosAlcohol, boolean certificada) {
         super(nombre, volumenMl, stock);
         this.gradosAlcohol = gradosAlcohol;
         this.certificada = certificada;
-        this.ventaRestringida = ventaRestringida;
+        this.ventaRestringida = false;
     }
 
     public boolean isCertificada(){
@@ -29,14 +29,38 @@ public class BebidaAlcoholica extends Bebida implements ConsumoResponsable{
 
     @Override
     public String obtenerDetalle() {
-        String textoSalida = super.obtenerDetalle() + "Grados: " + gradosAlcohol + "\n";
+        String textoSalida = super.obtenerDetalle() + "\nGrados: " + gradosAlcohol + "\n";
         if (certificada == true) {
-            return textoSalida + "Certificada";
+            textoSalida += "Certificada";
         } else {
-            return textoSalida + "No certificada";
+            textoSalida += "No certificada";
         }
-    }//ok
+        if (ventaRestringida == true){
+            textoSalida += "\nVenta restringida";
+        }
+        return textoSalida;
+        }
+    //ok
 
+
+    @Override
+    public void venderBebidaActual(int unidades) {
+        int venta = unidades;
+        if (unidades<1){
+            throw new VentaNoRealizada("ERROR: No se puede realizar una venta con numeros negativos");
+        }
+        if ((this.getStock() - unidades) < 0 ){
+            throw new VentaNoRealizada("ERROR: No se puede realizar una venta con numeros negativos");
+        }
+        if (this.ventaRestringida){
+            throw new VentaNoRealizada("ERROR la venta de este producto se encuentra restringida");
+        }
+        if (superaLimite(unidades)){
+            throw new VentaNoRealizada("ERROR: Lo sentimos. Ha superado el limite de venta por cliente.");
+        }
+        this.setStock(this.getStock() - unidades);
+        System.out.println("Venta realizada");
+    }
 
     //interfaz
     @Override
@@ -52,7 +76,7 @@ public class BebidaAlcoholica extends Bebida implements ConsumoResponsable{
 
     @Override
     public boolean superaLimite(int unidades) {
-        if (unidades > LIMITE_UNIDADES_POR_CLIENTE){
+        if (unidades <= LIMITE_UNIDADES_POR_CLIENTE){
             return false;
         } else {
             return true;

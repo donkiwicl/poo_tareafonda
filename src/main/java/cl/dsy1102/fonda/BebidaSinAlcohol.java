@@ -19,7 +19,7 @@ public class BebidaSinAlcohol extends Bebida {
 
     @Override
     public String obtenerDetalle() {
-        return super.obtenerDetalle() + "azucar * L : " + azucarPorLitro;
+        return super.obtenerDetalle() + "\nazucar * L : " + azucarPorLitro;
     }
 
 

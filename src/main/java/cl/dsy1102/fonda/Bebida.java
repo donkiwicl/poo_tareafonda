@@ -8,7 +8,7 @@ public abstract class Bebida {
     public Bebida(String nombre, int volumenMl, int stock) {
         setNombre(nombre);
         setVolumenMl(volumenMl);
-        this.stock = stock;
+        setStock(stock);
 
         //Falta aca poner todas las validaciones
         // nombre	No puede ser nulo ni vacío.
@@ -21,12 +21,12 @@ public abstract class Bebida {
 
     public abstract Double calcularPrecio ();
     public String obtenerDetalle(){
-        return nombre +"\n"+volumenMl+"Ml\n"+"Stock: " + stock;
+        return nombre +"\n"+volumenMl+"ml\n"+"Stock: " + stock;
     }
 
     @Override
     public String toString() {
-        return nombre + volumenMl;
+        return nombre + " " + volumenMl + "ml";
     }
 
     //Getters y setters
@@ -59,7 +59,7 @@ public abstract class Bebida {
     }
 
     public void setStock(int stock) {
-        if (stock < 0){
+        if (stock >= 0){
             this.stock = stock;
         } else {
             throw new IllegalArgumentException("Debe ser un valor mayor que cero.");
@@ -67,7 +67,7 @@ public abstract class Bebida {
     }
 
     //Metodo creado para ayudar la venta
-    public void vender(int unidades){
+    public void venderBebidaActual(int unidades){
         int venta = unidades;
         if (unidades<1){
             throw new VentaNoRealizada("ERROR: No se puede realizar una venta con numeros negativos");
@@ -76,12 +76,7 @@ public abstract class Bebida {
             throw new VentaNoRealizada("ERROR: No se puede realizar una venta con numeros negativos");
         }
         this.stock = this.stock - unidades;
+        System.out.println("Venta realizada");
     }
-
-
-
-
-
-
 
 }
