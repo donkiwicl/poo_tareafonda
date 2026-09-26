@@ -6,8 +6,8 @@ public abstract class Bebida {
     private int stock;
 
     public Bebida(String nombre, int volumenMl, int stock) {
-        this.nombre = nombre;
-        this.volumenMl = volumenMl;
+        setNombre(nombre);
+        setVolumenMl(volumenMl);
         this.stock = stock;
 
         //Falta aca poner todas las validaciones
@@ -35,7 +35,11 @@ public abstract class Bebida {
     }
 
     public void setNombre(String nombre) {
-        this.nombre = nombre;
+        if (nombre != null && !nombre.isEmpty()) {
+            this.nombre = nombre;
+        } else {
+            throw new IllegalArgumentException("No puede ser nulo ni vacio");
+        }
     }
 
     public int getVolumenMl() {
@@ -43,7 +47,11 @@ public abstract class Bebida {
     }
 
     public void setVolumenMl(int volumenMl) {
-        this.volumenMl = volumenMl;
+        if (100 <= volumenMl && volumenMl <= 3000){
+            this.volumenMl = volumenMl;
+        } else{
+            throw new IllegalArgumentException("Debe encontrarse en el rango entre 100 y 3.000 mililitros");
+        }
     }
 
     public int getStock() {
@@ -51,6 +59,29 @@ public abstract class Bebida {
     }
 
     public void setStock(int stock) {
-        this.stock = stock;
+        if (stock < 0){
+            this.stock = stock;
+        } else {
+            throw new IllegalArgumentException("Debe ser un valor mayor que cero.");
+        }
     }
+
+    //Metodo creado para ayudar la venta
+    public void vender(int unidades){
+        int venta = unidades;
+        if (unidades<1){
+            throw new VentaNoRealizada("ERROR: No se puede realizar una venta con numeros negativos");
+        }
+        if ((this.stock - unidades) < 0 ){
+            throw new VentaNoRealizada("ERROR: No se puede realizar una venta con numeros negativos");
+        }
+        this.stock = this.stock - unidades;
+    }
+
+
+
+
+
+
+
 }
