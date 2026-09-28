@@ -20,10 +20,10 @@ public class Main {
         ((ConsumoResponsable) b1).restringirVenta();
 
         GestorFonda gestor = new GestorFonda();
-        gestor.registrarBebida(b1);
-        gestor.registrarBebida(b2);
-        gestor.registrarBebida(b3);
-        gestor.registrarBebida(b4);
+        gestor.registrar(b1);
+        gestor.registrar(b2);
+        gestor.registrar(b3);
+        gestor.registrar(b4);
 
         System.out.println();
 

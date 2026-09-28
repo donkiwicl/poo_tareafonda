@@ -1,78 +1,65 @@
 package cl.dsy1102.fonda;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.ArrayList;
 
 public class GestorFonda {
 
-    // Atributos
     private List<Bebida> bebidas;
 
-
-
-    // Constructor
     public GestorFonda() {
         this.bebidas = new ArrayList<Bebida>();
     }
 
-
-
-    // Métodos de comportamiento
-    public void registrarBebida(Bebida bebida) throws IllegalArgumentException {
+    public void registrar(Bebida bebida) throws IllegalArgumentException {
         if (bebida == null) {
             throw new IllegalArgumentException("Bebida es null");
         } else {
             this.bebidas.add(bebida);
-            String tipoBebida;
-            if (bebida instanceof BebidaAlcoholica) {
-                tipoBebida = "BebidaAlcoholica";
-            } else if (bebida instanceof BebidaSinAlcohol) {
-                tipoBebida = "BebidaSinAlcohol";
+            String tipo;
+            if (bebida instanceof BebidaSinAlcohol) {
+                tipo = "BebidaSinAlcohol";
+            } else if (bebida instanceof BebidaAlcoholica) {
+                tipo = "BebidaAlcoholica";
             } else {
-                tipoBebida = "Bebida Desconocida";
+                tipo = "Bebida";
             }
-            System.out.println(bebida.getNombre() + " (" + tipoBebida + ") registrada correctamente.");
+            System.out.println("Bebida \"" + bebida.getNombre() + "\" (" + tipo + ") registrada correctamente");
         }
     }
 
-    public List<Bebida> buscarPorNombre(String nombre) throws IllegalArgumentException {
+    public List<Bebida> buscarPorNombre(String nombre) {
+        List<Bebida> matches = new ArrayList<Bebida>();
+        for (Bebida bebida : this.bebidas) {
+            if (bebida.getNombre().equalsIgnoreCase(nombre)) {
+                matches.add(bebida);
+            }
+        }
+        return matches;
+    }
+
+    public void vender(String nombre, int unidades) throws IllegalArgumentException {
         if (nombre == null) {
             throw new IllegalArgumentException("Nombre es null");
         } else if (nombre.isBlank()) {
-            throw new IllegalArgumentException("Nombre está en blanco");
-        } else {
-            List<Bebida> resultados = new ArrayList<>();
-            for (Bebida bebida : this.bebidas) {
-                if (bebida.getNombre().equals(nombre)) {
-                    resultados.add(bebida);
-                }
-            }
-            return resultados;
+            throw new IllegalArgumentException("Nombre está vacío");
         }
-    }
-
-    public void vender(String nombre, int unidades) {
-        Bebida match = null;
-        for (int i = 0; i < this.bebidas.size(); i++) {
-            if (this.bebidas.get(i).getNombre().equals(nombre)) {
-                match = this.bebidas.get(i);
-                break;
-            }
+        List<Bebida> bebidasEncontradas = this.buscarPorNombre(nombre);
+        if (bebidasEncontradas.size() == 0) {
+            System.out.println("No se encontró la bebida de nombre: \"" + nombre + "\"");
+            return;
         }
-        if (match == null) {
-            System.out.println("Venta rechazada: No se encontraron bebidas con el nombre '" + nombre + "'.");
-        } else {
-            if (match instanceof ConsumoResponsable) {
-                if (((ConsumoResponsable) match).tieneVentaRestringida()) {
-                    System.out.println("Venta rechazada: " + nombre + " tiene venta restringida.");
-                } else if (unidades > ConsumoResponsable.LIMITE_UNIDADES_POR_CLIENTE) {
-                    System.out.println("Venta rechazada: " + unidades + " unidades de " + nombre + " superan el límite de " + ConsumoResponsable.LIMITE_UNIDADES_POR_CLIENTE + " por cliente.");
-                } else {
-                    System.out.println("Venta autorizada: " + unidades + " x " + nombre + " | Total: $" + unidades * match.calcularPrecio());
-                }
-            } else if (match instanceof BebidaSinAlcohol) {
-                System.out.println("Venta autorizada: " + unidades + " x " + nombre + " | Total: $" + unidades * match.calcularPrecio());
+        Bebida bebidaPorVender = bebidasEncontradas.get(0);
+        if (bebidaPorVender instanceof ConsumoResponsable) {
+            if (((ConsumoResponsable) bebidaPorVender).tieneVentaRestringida()) {
+                System.out.println("Venta rechazada: " + bebidaPorVender.getNombre() + " tiene la venta restringida");
+            } else if (((ConsumoResponsable) bebidaPorVender).superaLimite(unidades)) {
+                System.out.println("Venta rechazada: " + unidades + " unidades de " + bebidaPorVender.getNombre() + " superan el límite de " + BebidaAlcoholica.LIMITE_UNIDADES_POR_CLIENTE + " por cliente");
+            } else {
+                System.out.println("Venta autorizada: " + unidades + " x " + bebidaPorVender.getNombre() + " | Total: $" + bebidaPorVender.calcularPrecio() * unidades);
             }
+        } else {
+            System.out.println("Venta autorizada: " + unidades + " x " + bebidaPorVender.getNombre() + " | Total: $" + bebidaPorVender.calcularPrecio() * unidades);
         }
     }
 
