@@ -28,24 +28,20 @@ public class GestorFonda {
         int unidad = unidades;
         while(true){
             List <Bebida> lista = buscarXNombre(nombre);
-            if (lista.size() > 1) {
-                for (Bebida bebida : lista) {
-                    if (bebida.getNombre().equals("Chicha") && bebida.getClass().getSimpleName().equals("BebidaAlcoholica")) {
-                        BebidaAlcoholica restringir =  (BebidaAlcoholica) bebida;
-                        if (restringir.tieneVentaRest()) {
-                            System.out.println("Venta rechazada: " + bebida.getNombre() + " tiene la venta restringida");
+            for(Bebida bebida : lista) {
+                if (bebida.getNombre().equals(nombre) && bebida.getClass().getSimpleName().equals("BebidaAlcoholica")) {
+                    BebidaAlcoholica bebidaAlcoholica1 = (BebidaAlcoholica) bebida;
+                    if (bebidaAlcoholica1.tieneVentaRest()){
+                        System.out.println("Venta rechazada: " + bebida.getNombre() + " tiene la venta restringida");
+                    }
+                    else{
+                        if (BebidaAlcoholica.Limite_Unidad_X_Cliente <= unidad) {
+                            System.out.println("Venta rechazada: " + unidad + " unidades de " + bebida.getNombre() + " supera el limite de 3 por cliente.");
+                        }else{
+                            System.out.println("Venta autorizada: " + unidad + " x " + bebida.getNombre() + " | $" + String.format("%.0f", bebida.calcularPrecio()*unidad));
                         }
                     }
-                }
-            } else {
-                Bebida bebida = lista.get(0);
-                if (bebida.getClass().getSimpleName().equals("BebidaAlcoholica")) {
-                    if (unidad > 3){
-                        System.out.println("Venta rechazada: " + unidad + " unidades de " + bebida.getNombre() + " supera el limite de 3 por cliente.");
-                    } else {
-                        System.out.println("Venta autorizada: " + unidad + " x " + bebida.getNombre() + " | $" + String.format("%.0f", bebida.calcularPrecio()*unidad));
-                    }
-                }else {
+                } else{
                     System.out.println("Venta autorizada: " + unidad + " x " + bebida.getNombre() + " | $" + String.format("%.0f", bebida.calcularPrecio()*unidad));
                 }
             }

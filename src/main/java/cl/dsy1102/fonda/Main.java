@@ -18,7 +18,7 @@ public class Main {
         List<Bebida> bebidas = new ArrayList<>();
         bebidas.add(new BebidaAlcoholica("Chicha", 1000, 40, 12.0, false));
         bebidas.add(new BebidaAlcoholica("Pisco Sour", 500, 25, 18.0, true));
-        bebidas.add(new BebidaSinAlcohol("Chicha", 1000, 60, 95));
+        bebidas.add(new BebidaSinAlcohol("Chicha cero", 1000, 60, 95));
         bebidas.add(new BebidaSinAlcohol("Mote con Huesillo", 400, 50, 70));
         GestorFonda gestor =  new GestorFonda();
 
@@ -36,6 +36,7 @@ public class Main {
         venta(gestor, "Pisco Sour", 5);
         venta(gestor, "Chicha", 2);
         venta(gestor, "Mote con Huesillo", 6);
+        venta(gestor, "Chicha cero", 2);
 
         // TODO 5: listar todas las bebidas.
         System.out.println("\n====== Listado Bebidas ======");
