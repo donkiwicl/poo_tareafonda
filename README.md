@@ -4,6 +4,8 @@
 
 > Material de práctica. No corresponde a una evaluación sumativa. Prepara la Evaluación Parcial 2.
 
+> **Rama `solucion`:** contiene la implementación de referencia. La explicación paso a paso de cómo cumple cada requisito está en [`GUIA_EA2.md`](GUIA_EA2.md). La rama `main` es la plantilla para estudiantes.
+
 | | |
 |---|---|
 | **Sigla** | DSY1102 |
