@@ -1,21 +1,45 @@
 package cl.dsy1102.fonda;
 
+import cl.dsy1102.fonda.model.Bebida;
+import cl.dsy1102.fonda.model.BebidaAlcoholica;
+import cl.dsy1102.fonda.model.BebidaSinAlcohol;
+import cl.dsy1102.fonda.model.GestorFonda;
+
 /**
  * Programa de consola de la Tarea Fiestas Patrias - Fonda San Belarmino (EA1).
  *
- * Revisa el enunciado en docs/enunciado-ea1.md. En EA2 las clases del
- * diagrama (Bebida, BebidaAlcoholica, BebidaSinAlcohol, ConsumoResponsable
- * y GestorFonda) viven en el paquete cl.dsy1102.fonda.model.
+ * Revisa el enunciado en docs/enunciado-ea1.md. Ejecuta con: mvn compile exec:java
  */
 public class Main {
 
     public static void main(String[] args) {
-        // TODO 1: instanciar las cuatro bebidas con los datos del enunciado.
-        // TODO 2: marcar la bebida alcoholica 'Chicha' con la venta restringida.
-        // TODO 3: registrarlas todas en el gestor.
-        // TODO 4: solicitar las cuatro ventas indicadas en el enunciado.
-        // TODO 5: buscar por nombre "Chicha" y listar todas las bebidas.
+        BebidaAlcoholica chicha = new BebidaAlcoholica("Chicha", 1000, 40, 12.0, false);
+        chicha.restringirVenta();
+        BebidaAlcoholica piscoSour = new BebidaAlcoholica("Pisco Sour", 500, 25, 18.0, true);
+        BebidaSinAlcohol chichaSinAlcohol = new BebidaSinAlcohol("Chicha", 1000, 60, 95);
+        BebidaSinAlcohol moteConHuesillo = new BebidaSinAlcohol("Mote con Huesillo", 400, 50, 70);
 
-        System.out.println("Proyecto listo. Comienza por la clase Bebida.");
+        GestorFonda gestor = new GestorFonda();
+        gestor.registrar(chicha);
+        gestor.registrar(piscoSour);
+        gestor.registrar(chichaSinAlcohol);
+        gestor.registrar(moteConHuesillo);
+
+        System.out.println("\n=== BUSQUEDA POR NOMBRE: \"Chicha\" ===");
+        for (Bebida bebida : gestor.buscarPorNombre("Chicha")) {
+            System.out.println(bebida.obtenerDetalle());
+            System.out.println("---");
+        }
+
+        System.out.println("\n=== VENTAS ===");
+        gestor.vender("Pisco Sour", 2);
+        gestor.vender("Pisco Sour", 5);
+        gestor.vender("Chicha", 1);
+        gestor.vender("Mote con Huesillo", 6);
+
+        System.out.println("\n=== LISTADO DE BEBIDAS ===");
+        for (Bebida bebida : gestor.obtenerTodas()) {
+            System.out.println(bebida);
+        }
     }
 }
