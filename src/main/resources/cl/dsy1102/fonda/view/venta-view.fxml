@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="cl.dsy1102.fonda.controller.VentaController"
+            stylesheets="@styles.css" styleClass="vista">
+    <top>
+        <VBox spacing="4">
+            <Label text="Registrar venta" styleClass="titulo"/>
+            <Label fx:id="lblNombre" styleClass="subtitulo"/>
+            <padding><Insets bottom="16"/></padding>
+        </VBox>
+    </top>
+
+    <center>
+        <VBox spacing="16">
+            <Label fx:id="lblDetalle" wrapText="true" styleClass="grupo" maxWidth="Infinity"/>
+            <HBox spacing="8" alignment="CENTER_LEFT">
+                <Label text="Unidades:"/>
+                <TextField fx:id="txtUnidades" promptText="Ej: 2" prefColumnCount="6"/>
+                <Button fx:id="btnVender" text="Vender" onAction="#onVender" styleClass="primario" defaultButton="true"/>
+            </HBox>
+            <Label fx:id="lblResultado" wrapText="true" styleClass="resultado"/>
+        </VBox>
+    </center>
+
+    <bottom>
+        <HBox alignment="CENTER_RIGHT">
+            <Button fx:id="btnVolver" text="Volver" onAction="#onVolver" cancelButton="true"/>
+            <padding><Insets top="12"/></padding>
+        </HBox>
+    </bottom>
+</BorderPane>

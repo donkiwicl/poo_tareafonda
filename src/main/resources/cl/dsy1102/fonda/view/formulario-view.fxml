@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="cl.dsy1102.fonda.controller.FormularioController"
+            stylesheets="@styles.css" styleClass="vista">
+    <top>
+        <Label fx:id="lblTitulo" text="Bebida" styleClass="titulo">
+            <BorderPane.margin><Insets bottom="16"/></BorderPane.margin>
+        </Label>
+    </top>
+
+    <center>
+        <ScrollPane fitToWidth="true" styleClass="sin-borde">
+            <VBox spacing="16" maxWidth="560">
+                <GridPane hgap="12" vgap="10">
+                    <columnConstraints>
+                        <ColumnConstraints minWidth="150"/>
+                        <ColumnConstraints hgrow="ALWAYS"/>
+                    </columnConstraints>
+                    <Label text="Tipo *" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                    <ComboBox fx:id="cmbTipo" promptText="Selecciona un tipo" maxWidth="Infinity"
+                              GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+                    <Label text="Nombre *" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                    <TextField fx:id="txtNombre" promptText="Ej: Pisco Sour"
+                               GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+                    <Label text="Volumen (ml) *" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                    <TextField fx:id="txtVolumen" promptText="Entre 100 y 3000"
+                               GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+                    <Label text="Stock *" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                    <TextField fx:id="txtStock" promptText="Mayor que 0"
+                               GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+                </GridPane>
+
+                <!-- 138 = 150 - 12 de padding del grupo, para alinear con los campos de arriba -->
+                <VBox fx:id="boxAlcoholica" spacing="10" styleClass="grupo">
+                    <Label text="Datos de bebida alcohólica" styleClass="subtitulo"/>
+                    <GridPane hgap="12" vgap="10">
+                        <columnConstraints>
+                            <ColumnConstraints minWidth="138"/>
+                            <ColumnConstraints hgrow="ALWAYS"/>
+                        </columnConstraints>
+                        <Label text="Grados de alcohol *" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                        <TextField fx:id="txtGrados" promptText="Entre 0,5 y 45"
+                                   GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+                        <CheckBox fx:id="chkCertificada" text="Certificada por el proveedor"
+                                  GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+                        <CheckBox fx:id="chkRestringida" text="Venta restringida"
+                                  GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+                    </GridPane>
+                </VBox>
+
+                <VBox fx:id="boxSinAlcohol" spacing="10" styleClass="grupo">
+                    <Label text="Datos de bebida sin alcohol" styleClass="subtitulo"/>
+                    <GridPane hgap="12" vgap="10">
+                        <columnConstraints>
+                            <ColumnConstraints minWidth="138"/>
+                            <ColumnConstraints hgrow="ALWAYS"/>
+                        </columnConstraints>
+                        <Label text="Azúcar (g/L) *" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                        <TextField fx:id="txtAzucar" promptText="Gramos por litro"
+                                   GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+                    </GridPane>
+                </VBox>
+            </VBox>
+        </ScrollPane>
+    </center>
+
+    <bottom>
+        <HBox spacing="8" alignment="CENTER_RIGHT">
+            <Button fx:id="btnVolver" text="Volver" onAction="#onVolver" cancelButton="true"/>
+            <Button fx:id="btnGuardar" text="Guardar" onAction="#onGuardar" styleClass="primario" defaultButton="true"/>
+            <padding><Insets top="12"/></padding>
+        </HBox>
+    </bottom>
+</BorderPane>

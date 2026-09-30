@@ -1,0 +1,79 @@
+/* Estilos comunes de la Fonda San Belarmino. */
+
+.vista {
+    -fx-padding: 20;
+    -fx-background-color: #faf7f2;
+    -fx-font-size: 13px;
+}
+
+.titulo {
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1f3a68;
+}
+
+.subtitulo {
+    -fx-font-size: 14px;
+    -fx-text-fill: #5b5b5b;
+}
+
+.grupo {
+    -fx-padding: 12;
+    -fx-background-color: white;
+    -fx-border-color: #e2dcd2;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+}
+
+.button {
+    -fx-padding: 6 16;
+    -fx-cursor: hand;
+}
+
+.button.primario {
+    -fx-background-color: #1f3a68;
+    -fx-text-fill: white;
+}
+
+.button.primario:hover {
+    -fx-background-color: #2c4f8c;
+}
+
+.button.peligro {
+    -fx-text-fill: #b3261e;
+}
+
+.table-column.numero {
+    -fx-alignment: CENTER_RIGHT;
+}
+
+.contador {
+    -fx-text-fill: #5b5b5b;
+}
+
+/* Campo marcado por la validacion del formulario. */
+.campo-error {
+    -fx-border-color: #b3261e;
+    -fx-border-width: 1.5;
+    -fx-border-radius: 3;
+}
+
+.resultado {
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+}
+
+.resultado-ok {
+    -fx-text-fill: #1e6b34;
+}
+
+.resultado-error {
+    -fx-text-fill: #b3261e;
+}
+
+.scroll-pane.sin-borde,
+.scroll-pane.sin-borde > .viewport {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+}

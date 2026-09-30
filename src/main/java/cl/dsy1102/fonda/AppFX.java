@@ -1,33 +1,55 @@
 package cl.dsy1102.fonda;
 
+import cl.dsy1102.fonda.controller.Alertas;
+import cl.dsy1102.fonda.controller.PrincipalController;
+import cl.dsy1102.fonda.dao.JsonBebidaDao;
+import cl.dsy1102.fonda.dao.PersistenciaException;
+import cl.dsy1102.fonda.model.Bebida;
+import cl.dsy1102.fonda.repository.BebidaRepository;
+import cl.dsy1102.fonda.repository.Repository;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
+import java.nio.file.Path;
+
 /**
- * Punto de entrada de la aplicacion grafica (EA2).
+ * Punto de entrada de la aplicacion grafica (EA2). Ejecuta con: mvn javafx:run
  *
- * Revisa el enunciado en README.md. Ejecuta con: mvn javafx:run
+ * Es el unico lugar, junto al DAO, que conoce la ubicacion del archivo de datos.
  */
 public class AppFX extends Application {
 
+    private static final Path ARCHIVO_DATOS = Path.of("data", "bebidas.json");
+
     @Override
     public void init() {
-        // TODO 1: trazar el ciclo de vida imprimiendo por consola.
+        System.out.println("[Ciclo de vida] init()  - hilo: " + Thread.currentThread().getName());
     }
 
     @Override
     public void start(Stage stage) {
-        // TODO 2: crear el DAO JSON y el repositorio de bebidas, y cargar los datos.
-        //         Si la carga falla, informar con un Alert y continuar con la lista vacia.
-        // TODO 3: cargar la vista principal (FXML), entregarle el repositorio a su
-        //         controlador y mostrarla en el Stage recibido (no crear uno con new).
-        stage.setTitle("Fonda San Belarmino");
+        System.out.println("[Ciclo de vida] start() - hilo: " + Thread.currentThread().getName());
+
+        Repository<Bebida> repositorio = new BebidaRepository(new JsonBebidaDao(ARCHIVO_DATOS));
+
+        Navegador.setStage(stage);
+        stage.setMinWidth(720);
+        stage.setMinHeight(480);
+        PrincipalController principal = Navegador.navegar("principal-view.fxml", "Fonda San Belarmino");
+        principal.inicializar(repositorio);
         stage.show();
+
+        try {
+            repositorio.cargar();
+        } catch (PersistenciaException e) {
+            Alertas.error("No se pudieron cargar los datos", e.getMessage()
+                    + "\n\nLa aplicacion iniciara sin bebidas. Si registras cambios, el archivo se reemplazara.");
+        }
     }
 
     @Override
     public void stop() {
-        // TODO 4: trazar el cierre de la aplicacion.
+        System.out.println("[Ciclo de vida] stop()  - hilo: " + Thread.currentThread().getName());
     }
 
     public static void main(String[] args) {
