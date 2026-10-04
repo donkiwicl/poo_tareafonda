@@ -1,88 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>cl.dsy1102</groupId>
-    <artifactId>fonda-san-belarmino</artifactId>
+    <groupId>org.example</groupId>
+    <artifactId>Fonda_18</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <packaging>jar</packaging>
-
-    <name>Fonda San Belarmino</name>
-    <description>
-        Tarea Fiestas Patrias - DSY1102 Programacion Orientada a Objetos.
-        EA1: Fundamentos de Programacion Orientada a Objetos.
-    </description>
 
     <properties>
+        <maven.compiler.source>25</maven.compiler.source>
+        <maven.compiler.target>25</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-
-        <!-- Version de Java del proyecto. Si tu laboratorio tiene JDK 25, cambia
-             este valor a 25 (y la version de JavaFX mas abajo, cuando la actives). -->
-        <maven.compiler.release>21</maven.compiler.release>
-
-        <!-- Clase que se ejecuta con: mvn exec:java -->
-        <exec.mainClass>cl.dsy1102.fonda.Main</exec.mainClass>
-
-        <!-- Se usara a partir de la experiencia de aprendizaje con interfaz grafica. -->
-        <javafx.version>21.0.5</javafx.version>
     </properties>
-
-    <dependencies>
-        <!--
-            EA1 no requiere dependencias: la solucion es de consola.
-
-            A partir de la experiencia con interfaz grafica, descomenta el bloque
-            siguiente y el plugin javafx-maven-plugin que esta mas abajo.
-
-        <dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-controls</artifactId>
-            <version>${javafx.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-fxml</artifactId>
-            <version>${javafx.version}</version>
-        </dependency>
-        -->
-    </dependencies>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.13.0</version>
-            </plugin>
-
-            <!-- Permite ejecutar el programa con: mvn compile exec:java -->
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
-                <version>3.5.0</version>
-                <configuration>
-                    <mainClass>${exec.mainClass}</mainClass>
-                </configuration>
-            </plugin>
-
-            <!--
-                A partir de la experiencia con interfaz grafica, descomenta este
-                plugin para ejecutar la aplicacion con: mvn javafx:run
-
-            <plugin>
-                <groupId>org.openjfx</groupId>
-                <artifactId>javafx-maven-plugin</artifactId>
-                <version>0.0.8</version>
-                <configuration>
-                    <mainClass>cl.dsy1102.fonda.AppFX</mainClass>
-                </configuration>
-            </plugin>
-            -->
-        </plugins>
-    </build>
 
 </project>
