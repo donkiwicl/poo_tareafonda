@@ -12,6 +12,7 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) {
+
         Bebida b1 = new BebidaAlcoholica("Chicha", 1000, 40, 12.0, false);
         Bebida b2 = new BebidaAlcoholica("Pisco Sour", 500, 25, 18.0, true);
         Bebida b3 = new BebidaSinAlcohol("Chicha", 1000, 60, 95);

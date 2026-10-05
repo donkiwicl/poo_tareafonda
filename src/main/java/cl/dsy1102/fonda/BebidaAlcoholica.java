@@ -2,16 +2,19 @@ package cl.dsy1102.fonda;
 
 public class BebidaAlcoholica extends Bebida implements ConsumoResponsable {
 
-    public static final int LIMITE_UNIDADES_POR_CLIENTE = 3;
-
     private double gradosAlcohol;
     private boolean certificada;
     private boolean ventaRestringida;
 
     public BebidaAlcoholica(String nombre, int volumenML, int stock, double gradosAlcohol, boolean certificada) {
         super(nombre, volumenML, stock);
-        this.gradosAlcohol = gradosAlcohol;
-        this.certificada = certificada;
+        this.setGradosAlcohol(gradosAlcohol);
+        this.setCertificada(certificada);
+        this.ventaRestringida = false;
+    }
+
+    public BebidaAlcoholica() {
+        this("BebidaAlcoholica", 500, 100, 10.0, true);
     }
 
     public double getGradosAlcohol() {
@@ -53,6 +56,11 @@ public class BebidaAlcoholica extends Bebida implements ConsumoResponsable {
     }
 
     @Override
+    public String obtenerTipo() {
+        return "BebidaAlcoholica";
+    }
+
+    @Override
     public boolean tieneVentaRestringida() {
         return this.ventaRestringida;
     }
@@ -64,7 +72,7 @@ public class BebidaAlcoholica extends Bebida implements ConsumoResponsable {
 
     @Override
     public boolean superaLimite(int unidades) {
-        if (unidades > BebidaAlcoholica.LIMITE_UNIDADES_POR_CLIENTE) {
+        if (unidades > ConsumoResponsable.LIMITE_UNIDADES_POR_CLIENTE) {
             return true;
         } else {
             return false;

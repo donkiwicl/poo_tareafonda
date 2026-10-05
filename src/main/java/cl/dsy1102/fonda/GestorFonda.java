@@ -16,15 +16,7 @@ public class GestorFonda {
             throw new IllegalArgumentException("Bebida es null");
         } else {
             this.bebidas.add(bebida);
-            String tipo;
-            if (bebida instanceof BebidaSinAlcohol) {
-                tipo = "BebidaSinAlcohol";
-            } else if (bebida instanceof BebidaAlcoholica) {
-                tipo = "BebidaAlcoholica";
-            } else {
-                tipo = "Bebida";
-            }
-            System.out.println("Bebida \"" + bebida.getNombre() + "\" (" + tipo + ") registrada correctamente");
+            System.out.println("Bebida \"" + bebida.getNombre() + "\" (" + bebida.obtenerTipo() + ") registrada correctamente");
         }
     }
 
@@ -54,7 +46,7 @@ public class GestorFonda {
             if (((ConsumoResponsable) bebidaPorVender).tieneVentaRestringida()) {
                 System.out.println("Venta rechazada: " + bebidaPorVender.getNombre() + " tiene la venta restringida");
             } else if (((ConsumoResponsable) bebidaPorVender).superaLimite(unidades)) {
-                System.out.println("Venta rechazada: " + unidades + " unidades de " + bebidaPorVender.getNombre() + " superan el límite de " + BebidaAlcoholica.LIMITE_UNIDADES_POR_CLIENTE + " por cliente");
+                System.out.println("Venta rechazada: " + unidades + " unidades de " + bebidaPorVender.getNombre() + " superan el límite de " + ConsumoResponsable.LIMITE_UNIDADES_POR_CLIENTE + " por cliente");
             } else {
                 System.out.println("Venta autorizada: " + unidades + " x " + bebidaPorVender.getNombre() + " | Total: $" + bebidaPorVender.calcularPrecio() * unidades);
             }

@@ -6,7 +6,11 @@ public class BebidaSinAlcohol extends Bebida {
 
     public BebidaSinAlcohol(String nombre, int volumenML, int stock, int azucarPorLitro) {
         super(nombre, volumenML, stock);
-        this.azucarPorLitro = azucarPorLitro;
+        this.setAzucarPorLitro(azucarPorLitro);
+    }
+
+    public BebidaSinAlcohol() {
+        this("BebidaSinAlcohol", 500, 100, 100);
     }
 
     public int getAzucarPorLitro() {
@@ -33,6 +37,11 @@ public class BebidaSinAlcohol extends Bebida {
                 " | Stock: " + this.getStock() +
                 " | Azúcar: " + this.getAzucarPorLitro() + " g/L" +
                 " | Precio: $" + this.calcularPrecio();
+    }
+
+    @Override
+    public String obtenerTipo() {
+        return "BebidaSinAlcohol";
     }
 
 }
