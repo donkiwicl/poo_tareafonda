@@ -4,20 +4,16 @@ public class BebidaAlcoholica extends Bebida implements ConsumoResponsable{
     public static final int LIMITE_UNIDADES_POR_CLIENTE = 3;
     private double gradosAlcohol;
     private boolean certificada;
-    private boolean ventaRestringida;
+    private boolean ventaRestringida = false;
 
     public BebidaAlcoholica(String nombre, int volumenMl, int stock, double gradosAlcohol, boolean certificada) {
         super(nombre, volumenMl, stock);
-        this.gradosAlcohol = gradosAlcohol;
-        this.certificada = certificada;
-        this.ventaRestringida = false;
+        setGradosAlcohol(gradosAlcohol);
+        setCertificada(certificada);
     }
 
-    public boolean isCertificada(){
-        return certificada;
-    } //ok
 
-
+    //Padre
     @Override
     public Double calcularPrecio() {
         if (isCertificada()){
@@ -25,42 +21,20 @@ public class BebidaAlcoholica extends Bebida implements ConsumoResponsable{
         }else {
             return 3500.0 * 1.2;
         }
-    }//ok
+    }
 
     @Override
     public String obtenerDetalle() {
-        String textoSalida = super.obtenerDetalle() + "\nGrados: " + gradosAlcohol + "\n";
-        if (certificada == true) {
-            textoSalida += "Certificada";
-        } else {
-            textoSalida += "No certificada";
-        }
-        if (ventaRestringida == true){
-            textoSalida += "\nVenta restringida";
-        }
-        return textoSalida;
-        }
-    //ok
-
-
-    @Override
-    public void venderBebidaActual(int unidades) {
-        int venta = unidades;
-        if (unidades<1){
-            throw new VentaNoRealizada("ERROR: No se puede realizar una venta con numeros negativos");
-        }
-        if ((this.getStock() - unidades) < 0 ){
-            throw new VentaNoRealizada("ERROR: No se puede realizar una venta con numeros negativos");
-        }
-        if (this.ventaRestringida){
-            throw new VentaNoRealizada("ERROR la venta de este producto se encuentra restringida");
-        }
-        if (superaLimite(unidades)){
-            throw new VentaNoRealizada("ERROR: Lo sentimos. Ha superado el limite de venta por cliente.");
-        }
-        this.setStock(this.getStock() - unidades);
-        System.out.println("Venta realizada");
+        return "Tipo: Bebida Alcoholica | Nombre: " + getNombre()
+                + " | Volumen: " + getVolumenML()+ " ml"
+                + " | Stock: " + getStock()
+                + " | Grados: " + gradosAlcohol
+                + " | Certificada: " + (certificada ? "Si" : "No")
+                + "\n  Venta restringida: " + (ventaRestringida ? "Si" : "No")
+                + " | Precio: $" + String.format("%.0f", calcularPrecio());
     }
+
+
 
     //interfaz
     @Override
@@ -71,17 +45,11 @@ public class BebidaAlcoholica extends Bebida implements ConsumoResponsable{
     @Override
     public void restringirVenta() {
         ventaRestringida = true;
-
     }
 
     @Override
     public boolean superaLimite(int unidades) {
-        if (unidades <= LIMITE_UNIDADES_POR_CLIENTE){
-            return false;
-        } else {
-            return true;
-        }
-
+        return unidades > LIMITE_UNIDADES_POR_CLIENTE;
     }
 
     //getters y setters
@@ -90,17 +58,17 @@ public class BebidaAlcoholica extends Bebida implements ConsumoResponsable{
     }
 
     public void setGradosAlcohol(double gradosAlcohol) {
-        if(0.5 < gradosAlcohol && gradosAlcohol < 45.0){
-            this.gradosAlcohol = gradosAlcohol;
-        } else {
-            throw new IllegalArgumentException("Debe encontrarse en el rango entre 0,5 y 45.");
+        if(gradosAlcohol < 0.5 || gradosAlcohol >45){
+            throw new IllegalArgumentException("Debe encontrarse en el rango entre 0.5 y 45");
         }
+        this.gradosAlcohol = gradosAlcohol;
     }
 
+    public boolean isCertificada(){
+        return certificada;
+    }
     public void setCertificada(boolean certificada) {
         this.certificada = certificada;
     }
-
-
 
 }
