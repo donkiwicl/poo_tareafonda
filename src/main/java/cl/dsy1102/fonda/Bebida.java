@@ -6,6 +6,10 @@ public abstract class Bebida {
     protected int volumenML;
     protected int stock;
 
+
+
+
+
     public Bebida(String nombre, int volumenML, int stock) {
         this.setNombre(nombre);
         this.setVolumenML(volumenML);
@@ -15,6 +19,10 @@ public abstract class Bebida {
     public Bebida() {
         this("Bebida", 500, 100);
     }
+
+
+
+
 
     public String getNombre() {
         return nombre;
@@ -56,11 +64,19 @@ public abstract class Bebida {
         }
     }
 
+
+
+
+
     public abstract double calcularPrecio();
 
     public abstract String obtenerDetalle();
 
     public abstract String obtenerTipo();
+
+
+
+
 
     @Override
     public String toString() {

@@ -4,6 +4,10 @@ public class BebidaSinAlcohol extends Bebida {
 
     private int azucarPorLitro;
 
+
+
+
+
     public BebidaSinAlcohol(String nombre, int volumenML, int stock, int azucarPorLitro) {
         super(nombre, volumenML, stock);
         this.setAzucarPorLitro(azucarPorLitro);
@@ -12,6 +16,10 @@ public class BebidaSinAlcohol extends Bebida {
     public BebidaSinAlcohol() {
         this("BebidaSinAlcohol", 500, 100, 100);
     }
+
+
+
+
 
     public int getAzucarPorLitro() {
         return azucarPorLitro;
@@ -24,6 +32,10 @@ public class BebidaSinAlcohol extends Bebida {
             this.azucarPorLitro = azucarPorLitro;
         }
     }
+
+
+
+
 
     @Override
     public double calcularPrecio() {

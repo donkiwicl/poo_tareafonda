@@ -1,28 +1,44 @@
 package cl.dsy1102.fonda;
 
+import java.lang.Double;
+
 public class BebidaAlcoholica extends Bebida implements ConsumoResponsable {
+
+    public static final int LIMITE_UNIDADES_POR_CLIENTE = 3;
 
     private double gradosAlcohol;
     private boolean certificada;
     private boolean ventaRestringida;
 
+
+
+
+
     public BebidaAlcoholica(String nombre, int volumenML, int stock, double gradosAlcohol, boolean certificada) {
         super(nombre, volumenML, stock);
         this.setGradosAlcohol(gradosAlcohol);
         this.setCertificada(certificada);
-        this.ventaRestringida = false;
+        this.setVentaRestringida(false);
     }
 
     public BebidaAlcoholica() {
         this("BebidaAlcoholica", 500, 100, 10.0, true);
     }
 
+
+
+
+
     public double getGradosAlcohol() {
         return gradosAlcohol;
     }
 
     public void setGradosAlcohol(double gradosAlcohol) throws IllegalArgumentException {
-        if (gradosAlcohol < 0.5) {
+        if (Double.isNaN(gradosAlcohol)) {
+            throw new IllegalArgumentException("Grado de alcohol es NaN");
+        } else if (Double.isInfinite(gradosAlcohol)) {
+            throw new IllegalArgumentException("Grado de alcohol es infinito");
+        } else if (gradosAlcohol < 0.5) {
             throw new IllegalArgumentException("Grado de alcohol menor a 0.5");
         } else if (gradosAlcohol > 45.0) {
             throw new IllegalArgumentException("Grado de alcohol menor a 45");
@@ -38,6 +54,14 @@ public class BebidaAlcoholica extends Bebida implements ConsumoResponsable {
     public void setCertificada(boolean certificada) {
         this.certificada = certificada;
     }
+
+    public void setVentaRestringida(boolean ventaRestringida) {
+        this.ventaRestringida = ventaRestringida;
+    }
+
+
+
+
 
     @Override
     public double calcularPrecio() {
@@ -72,7 +96,7 @@ public class BebidaAlcoholica extends Bebida implements ConsumoResponsable {
 
     @Override
     public boolean superaLimite(int unidades) {
-        if (unidades > ConsumoResponsable.LIMITE_UNIDADES_POR_CLIENTE) {
+        if (unidades > BebidaAlcoholica.LIMITE_UNIDADES_POR_CLIENTE) {
             return true;
         } else {
             return false;
