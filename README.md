@@ -23,7 +23,7 @@ Este proyecto **continúa la tarea de EA1**. El enunciado original del modelo de
 
 1. Pulsa **Fork** para crear el repositorio en tu cuenta de GitHub y clónalo.
 2. Abre la carpeta desde tu IDE como **proyecto Maven** (IntelliJ IDEA o NetBeans lo detectan al encontrar el `pom.xml`).
-3. Copia tus clases de EA1 al paquete `cl.dsy1102.fonda.model` y ajusta su línea `package`.
+3. El paquete `cl.dsy1102.fonda.model` ya contiene la **solución de EA1** (y `Main` la demuestra por consola). Puedes usarla como punto de partida o reemplazarla por tus propias clases, ajustando su línea `package`.
 4. Desarrolla las capas siguiendo el orden de los requerimientos.
 5. Haz commits a medida que avanzas. **El historial de commits se evalúa**: una entrega con un único commit no evidencia el proceso.
 
@@ -160,7 +160,7 @@ classDiagram
 
 ### R2. Modelo
 
-- Mueve las clases de EA1 al paquete `model`. Se mantienen todas sus reglas: precios, validaciones con `IllegalArgumentException`, constante `LIMITE_UNIDADES_POR_CLIENTE` e interfaz `ConsumoResponsable`.
+- Las clases de EA1 están en el paquete `model` (solución incluida). Se mantienen todas sus reglas: precios, validaciones con `IllegalArgumentException`, constante `LIMITE_UNIDADES_POR_CLIENTE` e interfaz `ConsumoResponsable`.
 - Agrega a `Bebida` un método abstracto `obtenerTipo()` que retorne `"Alcohólica"` o `"Sin alcohol"`, para mostrarlo en la tabla sin preguntar por la clase concreta.
 - Para que Jackson pueda reconstruir los objetos, cada clase concreta necesita un constructor sin parámetros y el archivo debe registrar el subtipo de cada bebida (ver R6).
 
@@ -268,8 +268,8 @@ poo_tareafonda/
     │   └── cl/dsy1102/fonda/
     │       ├── AppFX.java                 (ya incluido, completar)
     │       ├── Navegador.java             ← debes crearla
-    │       ├── Main.java                  (EA1)
-    │       ├── model/                     ← clases de EA1
+    │       ├── Main.java                  (EA1, resuelto)
+    │       ├── model/                     ← solución de EA1 (completar según R2)
     │       ├── dao/                       ← BebidaDao, JsonBebidaDao, PersistenciaException
     │       ├── repository/                ← Repository, BebidaRepository
     │       └── controller/                ← un controlador por vista
