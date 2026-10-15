@@ -75,13 +75,11 @@ Vista (FXML) → Controlador → Repository (interfaz) → BebidaRepository → 
 | `javafx-controls` | Controles (`TableView`, `Button`, `TextField`, `Alert`...). Trae `javafx-base` y `javafx-graphics` como dependencias transitivas. |
 | `javafx-fxml` | `FXMLLoader` y la inyección de `@FXML`. |
 | `jackson-databind` | `ObjectMapper` para convertir objetos a JSON y viceversa. Trae `jackson-core` y `jackson-annotations`. |
-| `maven.compiler.release` 25 y `javafx.version` 25.0.4 | El proyecto usa JDK 25 LTS. **La versión mayor de JavaFX debe coincidir con la del JDK**: JavaFX 25 no funciona en JDK 21, y con JDK 21 se debe volver a `21` y `21.0.6`. |
-| `javafx-maven-plugin` | `mvn javafx:run`. Con `module-info.java` la clase se indica como `modulo/clase`: `cl.dsy1102.fonda/cl.dsy1102.fonda.AppFX`. La opción `--enable-native-access=javafx.graphics` es necesaria desde JDK 24: sin ella aparece la advertencia *"A restricted method in java.lang.System has been called"*, que en futuras versiones será un error. |
+| `maven.compiler.release` 21 y `javafx.version` 21.0.6 | El proyecto usa JDK 21 LTS. **La versión mayor de JavaFX debe coincidir con la del JDK**: JavaFX 25 no funciona en JDK 21, así que no se debe subir `javafx.version` sin cambiar también el JDK. |
+| `javafx-maven-plugin` | `mvn javafx:run`. Con `module-info.java` la clase se indica como `modulo/clase`: `cl.dsy1102.fonda/cl.dsy1102.fonda.AppFX`. |
 | `maven-clean-plugin` 3.3.2 y `maven-resources-plugin` 3.3.1 | Se fijan las versiones porque las que trae Maven 3.8 por defecto (2.5 y 2.6) no suelen estar en el repositorio local de los laboratorios, y así `mvn -o` no funciona. |
 
 > **Sin internet en la EP2:** ejecuta `mvn compile` y `mvn javafx:run` con conexión antes de la evaluación para que todo quede en `~/.m2`. Desde ahí funciona con `mvn -o`.
->
-> Con Maven 3.8 sobre JDK 25 puede aparecer *"sun.misc.Unsafe::objectFieldOffset has been called by com.google.common..."*. La advertencia viene de la biblioteca Guava que usa el propio Maven, no del proyecto, y no afecta la compilación.
 
 ### 1.2 `module-info.java`
 
@@ -343,7 +341,7 @@ Recorrido de pruebas del enunciado, con el resultado que entrega esta solución:
 | Síntoma | Causa | Solución |
 |---|---|---|
 | `Module javafx.controls not found` o `JavaFX runtime components are missing` | Se ejecutó la clase con el botón Run del IDE sin module path | Ejecuta con `mvn javafx:run` o configura el IDE para usar Maven |
-| `release version 25 not supported` o `class file has wrong version 69.0` | El IDE o Maven usa un JDK anterior al 25 | Configura el SDK del proyecto en JDK 25 (en IntelliJ: *Project Structure → SDK*) y revisa `mvn -v` |
+| `release version 21 not supported` o `class file has wrong version 65.0` | El IDE o Maven usa un JDK anterior al 21 | Configura el SDK del proyecto en JDK 21 (en IntelliJ: *Project Structure → SDK*) y revisa `mvn -v` |
 | `IllegalAccessException ... does not open cl.dsy1102.fonda.controller` | Falta `opens ... to javafx.fxml` | Revisa `module-info.java` |
 | `InvalidDefinitionException: Cannot construct instance of Bebida` | Falta `@JsonTypeInfo`/`@JsonSubTypes` o el JSON no tiene `"tipo"` | Anota `Bebida` y guarda con `writerFor(TypeReference)` |
 | `Location is not set` al cargar FXML | Ruta del recurso mal escrita | Los FXML están en `/cl/dsy1102/fonda/view/`, con `/` inicial |

@@ -13,7 +13,7 @@
 | **Indicadores de logro** | IL 2.1 al IL 2.8 |
 | **Tiempo estimado** | 4 bloques |
 | **Modalidad** | Individual, con acompañamiento docente |
-| **Tecnologías** | Java 25 · Maven · JavaFX 25 · FXML / Scene Builder · Jackson |
+| **Tecnologías** | Java 21 · Maven · JavaFX 21 · FXML / Scene Builder · Jackson |
 
 ---
 
@@ -31,11 +31,11 @@ Este proyecto **continúa la tarea de EA1**. El enunciado original del modelo de
 
 | Herramienta | Versión |
 |---|---|
-| JDK | 25 (LTS) |
+| JDK | 21 (LTS) |
 | Maven | 3.8 o superior (IntelliJ IDEA y NetBeans traen uno incorporado) |
-| Scene Builder | 25 o superior (opcional, recomendado) |
+| Scene Builder | 21 o superior (opcional, recomendado) |
 
-En IntelliJ IDEA, el SDK del proyecto (*File → Project Structure → Project → SDK*) debe ser un JDK 25. Si tu equipo solo tiene JDK 21, cambia en el `pom.xml` `maven.compiler.release` a `21` y `javafx.version` a `21.0.6`: la versión mayor de JavaFX debe coincidir con la del JDK.
+En IntelliJ IDEA, el SDK del proyecto (*File → Project Structure → Project → SDK*) debe ser un JDK 21. El `pom.xml` fija `maven.compiler.release` en `21` y `javafx.version` en `21.0.6`: la versión mayor de JavaFX debe coincidir con la del JDK.
 
 ### Comandos
 

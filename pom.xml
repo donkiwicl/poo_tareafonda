@@ -20,14 +20,14 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-        <!-- Version de Java del proyecto (JDK 25 LTS). La version mayor de
+        <!-- Version de Java del proyecto (JDK 21 LTS). La version mayor de
              JavaFX debe coincidir con la del JDK. -->
-        <maven.compiler.release>25</maven.compiler.release>
+        <maven.compiler.release>21</maven.compiler.release>
 
         <!-- Clase de consola de EA1, se ejecuta con: mvn compile exec:java -->
         <exec.mainClass>cl.dsy1102.fonda.Main</exec.mainClass>
 
-        <javafx.version>25.0.4</javafx.version>
+        <javafx.version>21.0.6</javafx.version>
         <jackson.version>2.21.4</jackson.version>
     </properties>
 
@@ -95,11 +95,6 @@
                 <version>0.0.8</version>
                 <configuration>
                     <mainClass>cl.dsy1102.fonda/cl.dsy1102.fonda.AppFX</mainClass>
-                    <options>
-                        <!-- Desde JDK 24 cargar bibliotecas nativas requiere permiso
-                             explicito; JavaFX lo necesita para dibujar la ventana. -->
-                        <option>--enable-native-access=javafx.graphics</option>
-                    </options>
                 </configuration>
             </plugin>
         </plugins>
