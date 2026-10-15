@@ -297,7 +297,7 @@ En experiencias de aprendizaje posteriores este mismo proyecto se extiende con u
 
 No es necesario hacerlo ahora: la solución de esta tarea es de consola y no requiere ninguna dependencia externa.
 
-Si tu JDK es la versión 25, cambia `maven.compiler.release` a `25` y `javafx.version` a `25.0.1`, de modo que ambas versiones coincidan.
+El proyecto usa JDK 21: `maven.compiler.release` en `21` y `javafx.version` en `21.0.6`, de modo que ambas versiones coincidan.
 
 ---
 
