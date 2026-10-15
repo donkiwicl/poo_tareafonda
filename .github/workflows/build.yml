@@ -3,15 +3,23 @@ name: Compilar
 # Verifica que el proyecto compile en cada push y en cada pull request.
 # Si el check sale en verde, tu codigo compila: es el primer requisito
 # de la tarea. Si sale en rojo, abre el log y revisa el error de compilacion.
+# Para impedir el merge de codigo roto, marca el check "Compilar" como
+# obligatorio en Settings > Branches > Branch protection rules.
 
 on:
   push:
     branches: ["**"]
   pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: compilar-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   compilar:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
 
@@ -23,4 +31,4 @@ jobs:
           cache: maven
 
       - name: Compilar con Maven
-        run: mvn -B compile
+        run: mvn -B -ntp compile
